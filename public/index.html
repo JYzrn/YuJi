@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YuJi API - Social Media Parser</title>
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      max-width: 800px;
+      width: 100%;
+      padding: 40px;
+    }
+    h1 {
+      color: #667eea;
+      margin-bottom: 10px;
+      font-size: 2.5em;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1.1em;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #764ba2;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 5px;
+    }
+    .endpoint {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      margin: 10px 0;
+      overflow-x: auto;
+    }
+    .endpoint code {
+      color: #667eea;
+      font-size: 0.9em;
+    }
+    .features {
+      list-style: none;
+      padding: 0;
+    }
+    .features li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+    }
+    .features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #667eea;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .example {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      border-left: 4px solid #667eea;
+    }
+    .example h3 {
+      color: #764ba2;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+    .example pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.85em;
+    }
+    .platforms {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
+    .platform {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 500;
+      font-size: 0.9em;
+    }
+    a {
+      color: #667eea;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .note {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 12px;
+      border-radius: 4px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎬 YuJi API</h1>
+    <p class="subtitle">Social Media Content Parser for Instagram, X (Twitter) & YouTube</p>
+    
+    <div class="section">
+      <h2>Supported Platforms</h2>
+      <div class="platforms">
+        <span class="platform">📷 Instagram</span>
+        <span class="platform">🐦 X (Twitter)</span>
+        <span class="platform">📺 YouTube</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>API Endpoint</h2>
+      <div class="endpoint">
+        <code>GET /api/parse?url={encoded_url}</code>
+      </div>
+      <div class="note">
+        <strong>Note:</strong> Make sure to URL-encode your social media link when passing it as the <code>url</code> parameter.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Features</h2>
+      <ul class="features">
+        <li>Parse Instagram posts, reels, and stories</li>
+        <li>Extract X (Twitter) tweets with media</li>
+        <li>Get YouTube video information and thumbnails</li>
+        <li>No authentication required</li>
+        <li>CORS-enabled for cross-origin requests</li>
+        <li>Fast serverless processing</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Example Request</h2>
+      <div class="example">
+        <h3>JavaScript Fetch</h3>
+        <pre>const url = 'https://www.instagram.com/p/example/';
+const apiUrl = `/api/parse?url=${encodeURIComponent(url)}`;
+
+fetch(apiUrl)
+  .then(res => res.json())
+  .then(data => {
+    if (data.code === 0) {
+      console.log(data.data);
+      // { platform, title, author, imageList[], videoUrl }
+    }
+  });</pre>
+      </div>
+
+      <div class="example">
+        <h3>Response Format</h3>
+        <pre>{
+  "code": 0,
+  "msg": "ok",
+  "data": {
+    "platform": "instagram",
+    "title": "Post title",
+    "author": "username",
+    "imageList": ["url1", "url2"],
+    "videoUrl": "video_url"
+  }
+}</pre>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Documentation</h2>
+      <p>For more details, visit the <a href="https://github.com/JYzrn/YuJi" target="_blank">GitHub repository</a>.</p>
+    </div>
+  </div>
+</body>
+</html>
